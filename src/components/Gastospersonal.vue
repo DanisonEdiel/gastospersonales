@@ -229,7 +229,7 @@
           </table>
         </div>
       </div>
-      <button @click="goToPage">Ir a la página</button>    
+      <button @click="generarYDescargarPDF">Ver Formulario SRI</button>
     </form>
   </body>
 
@@ -410,8 +410,13 @@ export default {
         this[field] = Math.floor(value);
       }
     },
-    goToPage() {
-      this.$router.push('/pdf');
+    generarYDescargarPDF() {
+      // Supongamos que tienes una función en Pdf.vue llamada generarPDF que acepta los datos y genera el PDF
+      this.$root.$emit('generar-pdf', {
+        cedulaRuc: this.cedulaRuc,
+        nombre: this.nombre,
+        ciudad: this.ciudad,
+      });
     }
     //termina detalle ingresos del colaborador
   },

@@ -8,14 +8,19 @@
   
   <script>
   export default {
-    name: 'AppPdf',
-    data() {
-      return {
-      };
+    mounted() {
+      this.$root.$on('generar-pdf', (data) => {
+        // Generar el PDF con los datos recibidos
+        this.generarPDF(data);
+      });
     },
     methods: {
-    },
-  };
+      generarPDF(data) {
+        // Generar el PDF y descargarlo
+        return data == 'ok';
+      }
+    }
+  }
   </script>
   
   <style scoped>
