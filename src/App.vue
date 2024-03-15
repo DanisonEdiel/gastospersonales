@@ -1,14 +1,17 @@
 <template>
-  <Gastospersonales msg="Welcome to Your Vue.js App"/>
+  <Gastospersonales msg="Tablas"/>
+  <AppPdf msg="Pdf"/>
 </template>
 
 <script>
 import Gastospersonales from './components/Gastospersonal.vue'
+import AppPdf from './components/AppPdf.vue'
 
 export default {
   name: 'App',
   components: {
     Gastospersonales,
+    AppPdf
   }
 }
 </script>

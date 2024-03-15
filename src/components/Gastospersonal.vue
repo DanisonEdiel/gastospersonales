@@ -7,246 +7,235 @@
   </head>
 
   <body>
-    <div class="container">
-      <!-- Primera tabla -->
-
-      <table class="table">
-        <thead class="table-header">
-          <tr>
-            <th colspan="2" class="text-center">Datos personales del Colaborador</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Número de cédula</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Nombres completos</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Ciudad de Trabajo</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Fecha de <strong>elaboración</strong></td>
-            <td>Año (números)</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>Mes (números)</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>Día (números)</td>
-          </tr>
-          <!-- Añade más filas según sea necesario -->
-          <tr>
-            <td></td>
-            </tr>
-          <tr>
-            <td><input v-model="cedula" type="text" @input="fetchData"></td>
-          </tr>
-          <tr>
-            <td><input v-model="nombreCompleto" type="text" disabled></td>
-          </tr>
-          <tr>
-            <td><input v-model="ciudadTrabajo" type="text" disabled></td>
-          </tr>
-          <tr>
-            <td><input type="text"></td>
-          </tr>
-          <tr>
-            <td><input type="text"></td>
-          </tr>
-          <!-- Añade más filas según sea necesario -->
-      </table>
-      </td>
-      </tr>
-      </tbody>
-
-      </table>
-
-      <!-- Segunda tabla detalle de ingresos del colaborador -->
-      <div class="container mt-5">
-        <h2 class="text-center mb-4">Detalle de Ingresos del Colaborador</h2>
-        <table class="table table-bordered">
+    <form>
+      <div class="container">
+        <!-- Primera tabla -->
+        <table class="table">
           <thead class="table-header">
             <tr>
-              <th></th>
-              <th>Mensual</th>
-              <th>No. Veces al año</th>
-              <th>Ingreso Anual</th>
+              <th colspan="3" class="text-center">Datos personales del Colaborador</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Salario</td>
-              <td><input v-model="salarioMensual" @input="formatInput('salarioMensual')" type="text" id="salarioMensual"
-                  placeholder="USD"></td>
-              <td><input v-model="salarioVeces" @input="validateInput('salarioVeces', null, 100)" type="number" min="1"
-                  max="100" placeholder="-"></td>
-              <td class="text-right">
-                <p>{{ salario }}</p>
-              </td>
+              <td>Número de cédula</td>
+              <td></td>
+              <td><input v-model="cedulaRuc" type="text"></td>
             </tr>
             <tr>
-              <td>Comisiones Mandato</td>
-              <td><input v-model="comisionesMandatoMensual" @input="formatInput('comisionesMandatoMensual')" type="text"
-                  placeholder="USD"></td>
-              <td><input v-model="comisionesMandatoVeces" @input="validateInput('comisionesMandatoVeces', null, 100)"
-                  type="text" placeholder="-"></td>
-              <td class="text-right">
-                <p>{{ comisionesMandato }}</p>
-              </td>
+              <td>Nombres completos</td>
+              <td></td>
+              <td><input v-model="nombre" type="text"></td>
             </tr>
             <tr>
-              <td>Remuneración Variable</td>
-              <td><input v-model="remuneracionVariableMensual" @input="formatInput('remuneracionVariableMensual')"
-                  type="text" placeholder="USD"></td>
-              <td><input v-model="remuneracionVariableVeces"
-                  @input="validateInput('remuneracionVariableVeces', null, 100)" type="text" placeholder="-"></td>
-              <td class="text-right">
-                <p>{{ remuneracionVariable }}</p>
-              </td>
+              <td>Ciudad de Trabajo</td>
+              <td></td>
+              <td><input v-model="ciudad" type="text"></td>
             </tr>
             <tr>
-              <td>Horas extras</td>
-              <td><input v-model="horasExtrasMensual" @input="formatInput('horasExtrasMensual')" type="text"
-                  placeholder="USD"></td>
-              <td><input v-model="horasExtrasVeces" type="text" placeholder="-"></td>
-              <td class="text-right">
-                <p>{{ horasExtras }}</p>
-              </td>
+              <td>Fecha de <strong>elaboración</strong></td>
+              <td>Año (números)</td>
+              <td><input v-model="fecha" type="text"></td>
             </tr>
             <tr>
-              <td>Otros</td>
-              <td><input v-model="otrosMensual" @input="formatInput('otrosMensual')" type="text" placeholder="USD"></td>
-              <td><input v-model="otrosVeces" @input="validateInput('otrosVeces', null, 100)" type="text"
-                  placeholder="-">
-              </td>
-              <td class="text-right">
-                <p>{{ otros }}</p>
-              </td>
+              <td></td>
+              <td>Mes (números)</td>
+              <td><input type="text"></td>
             </tr>
             <tr>
-              <td>Utilidades (A recibir Abr 2024)</td>
-              <td><input v-model="utilidadesMensual" @input="formatInput('utilidadesMensual')" type="text"
-                  placeholder="USD"></td>
-              <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 100)" type="text"
-                  placeholder="-">
-              </td>
-              <td class="text-right">
-                <p>{{ utilidades }}</p>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">Total Ingresos Anuales Proyectados</td>
-              <td class="text-right">
-                <p>{{ totalIngresosAnuales }}</p>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="4">Si tienes o has tenido otro empleador durante el año 2024, es decir constas bajo otra
-                relación de dependencia:</td>
-            </tr>
-            <tr>
-              <td>Ingresos (salario, comisiones, bonos)</td>
-              <td><input v-model="ingresoMensual" @input="formatInput('ingresoMensual')" type="text" placeholder="USD">
-              </td>
-              <td><input v-model="ingresoVeces" @input="validateInput('ingresoVeces', null, 100)" type="text"
-                  placeholder="-"></td>
-              <td class="text-right">
-                <p>{{ ingresos }}</p>
-              </td>
-            </tr>
-            <tr>
-              <td>Vacaciones pagadas</td>
-              <td><input v-model="vacacionesMensual" @input="formatInput('vacacionesMensual')" type="text"
-                  placeholder="USD"></td>
-              <td><input v-model="vacacionesVeces" @input="validateInput('vacacionesVeces', null, 100)" type="text"
-                  placeholder="-">
-              </td>
-              <td class="text-right">
-                <p>{{ vacaciones }}</p>
-              </td>
-            </tr>
-            <tr>
-              <td>Utilidades (recibidad Abr 2024)</td>
-              <td><input v-model="utilidadesEmpleadorMensual" @input="formatInput('utilidadesEmpleadorMensual')"
-                  type="text" placeholder="USD"></td>
-              <td><input v-model="utilidadesEmpleadorVeces"
-                  @input="validateInput('utilidadesEmpleadorVeces', null, 100)" type="text" placeholder="-"></td>
-              <td class="text-right">
-                <p>{{ utilidadesEmpleador }}</p>
-              </td>
-            </tr>
+              <td></td>
+              <td>Día (números)</td>
+              <td><input type="text"></td>
 
-            <tr>
-              <td colspan="3">Total Ingresos Anuales Proyectados - Otro empleador</td>
-              <td class="text-right">
-                <p>{{ ingresosAnualesEmpleador }}</p>
-              </td>
             </tr>
-            <tr>
-              <td colspan="3">TOTAL INGRESOS ANUALES (INCLUYE INGRESOS EXENTOS) CONSOLIDADO</td>
-              <td class="text-right">
-                <p>{{ ingresosAnualesConsolidado }}</p>
-              </td>
-            </tr>
+            <!-- Añade más filas según sea necesario -->
           </tbody>
         </table>
-      </div>
+        <!-- Segunda tabla detalle de ingresos del colaborador -->
+        <div class="container mt-5">
+          <h2 class="text-center mb-4">Detalle de Ingresos del Colaborador</h2>
+          <table class="table table-bordered">
+            <thead class="table-header">
+              <tr>
+                <th></th>
+                <th>Mensual</th>
+                <th>No. Veces al año</th>
+                <th>Ingreso Anual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Salario</td>
+                <td><input v-model="salarioMensual" @input="formatInput('salarioMensual')" type="text"
+                    id="salarioMensual" placeholder="USD"></td>
+                <td><input v-model="salarioVeces" @input="validateInput('salarioVeces', null, 100)" type="number"
+                    min="1" max="100" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ salario }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Comisiones Mandato</td>
+                <td><input v-model="comisionesMandatoMensual" @input="formatInput('comisionesMandatoMensual')"
+                    type="text" placeholder="USD"></td>
+                <td><input v-model="comisionesMandatoVeces" @input="validateInput('comisionesMandatoVeces', null, 100)"
+                    type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ comisionesMandato }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Remuneración Variable</td>
+                <td><input v-model="remuneracionVariableMensual" @input="formatInput('remuneracionVariableMensual')"
+                    type="text" placeholder="USD"></td>
+                <td><input v-model="remuneracionVariableVeces"
+                    @input="validateInput('remuneracionVariableVeces', null, 100)" type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ remuneracionVariable }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Horas extras</td>
+                <td><input v-model="horasExtrasMensual" @input="formatInput('horasExtrasMensual')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="horasExtrasVeces" type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ horasExtras }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Otros</td>
+                <td><input v-model="otrosMensual" @input="formatInput('otrosMensual')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="otrosVeces" @input="validateInput('otrosVeces', null, 100)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ otros }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Utilidades (A recibir Abr 2024)</td>
+                <td><input v-model="utilidadesMensual" @input="formatInput('utilidadesMensual')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 100)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ utilidades }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">Total Ingresos Anuales Proyectados</td>
+                <td class="text-right">
+                  <p>{{ totalIngresosAnuales }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">Si tienes o has tenido otro empleador durante el año 2024, es decir constas bajo otra
+                  relación de dependencia:</td>
+              </tr>
+              <tr>
+                <td>Ingresos (salario, comisiones, bonos)</td>
+                <td><input v-model="ingresoMensual" @input="formatInput('ingresoMensual')" type="text"
+                    placeholder="USD">
+                </td>
+                <td><input v-model="ingresoVeces" @input="validateInput('ingresoVeces', null, 100)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ ingresos }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Vacaciones pagadas</td>
+                <td><input v-model="vacacionesMensual" @input="formatInput('vacacionesMensual')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="vacacionesVeces" @input="validateInput('vacacionesVeces', null, 100)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ vacaciones }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>Utilidades (recibidad Abr 2024)</td>
+                <td><input v-model="utilidadesEmpleadorMensual" @input="formatInput('utilidadesEmpleadorMensual')"
+                    type="text" placeholder="USD"></td>
+                <td><input v-model="utilidadesEmpleadorVeces"
+                    @input="validateInput('utilidadesEmpleadorVeces', null, 100)" type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ utilidadesEmpleador }}</p>
+                </td>
+              </tr>
 
-      <!--tercera tabla credito tributario para impuesto a la renta por gastos personales-->
-      <div class="container mt-5">
-        <h2 class="text-center mb-4">Cálculo de gastos personales</h2>
-        <table class="table table-bordered">
-          <thead class="table-header">
-            <tr>
-              <th colspan="2" class="text-center">DATOS BASE PARA EL CALCULO DEL CREDITO TRIBUTARIO PARA IMPUESTO A LA
-                RENTA POR GASTOS PERSONALES</th>
-            </tr>
-          </thead>
-          <tbody class="text-right">
-            <tr>
-              <td>Canasta Básica Familiar</td>
-              <td>
-                789,57
-              </td>
-            </tr>
-            <tr>
-              <td>¿Va a declarar cargas familiares?</td>
-              <td><input v-model="cargasFamiliares" type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>¿Cuántas cargas familiares va a declarar?</td>
-              <td>
-                <input v-model="numeroCargas" type="number" placeholder="ej: 4" :disabled="!cargasFamiliares">
-              </td>
-            </tr>
-            <tr>
-              <td>Máximo en Gastos personales para aplicar en el año 2024 según sus cargas</td>
-              <td>USD {{ gastosPersonales }}</td>
-            </tr>
-            <tr>
-              <td>¿Tiene usted o alguna de sus cargas familiares alguna enfermedad catalogada como catastrófica, rara o
-                huérfana?</td>
-              <td><input v-model="enfermedadCatastrofica" type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>REBAJA MÁXIMA DEL IMPUESTO A LA RENTA 2024</td>
-              <td>USD {{ rebajaMaxima }}</td>
-            </tr>
-          </tbody>
-        </table>
+              <tr>
+                <td colspan="3">Total Ingresos Anuales Proyectados - Otro empleador</td>
+                <td class="text-right">
+                  <p>{{ ingresosAnualesEmpleador }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="3">TOTAL INGRESOS ANUALES (INCLUYE INGRESOS EXENTOS) CONSOLIDADO</td>
+                <td class="text-right">
+                  <p>{{ ingresosAnualesConsolidado }}</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!--tercera tabla credito tributario para impuesto a la renta por gastos personales-->
+        <div class="container mt-5">
+          <h2 class="text-center mb-4">Cálculo de gastos personales</h2>
+          <table class="table table-bordered">
+            <thead class="table-header">
+              <tr>
+                <th colspan="2" class="text-center">DATOS BASE PARA EL CALCULO DEL CREDITO TRIBUTARIO PARA IMPUESTO A LA
+                  RENTA POR GASTOS PERSONALES</th>
+              </tr>
+            </thead>
+            <tbody class="text-right">
+              <tr>
+                <td>Canasta Básica Familiar</td>
+                <td>
+                  789,57
+                </td>
+              </tr>
+              <tr>
+                <td>¿Va a declarar cargas familiares?</td>
+                <td><input v-model="cargasFamiliares" type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>¿Cuántas cargas familiares va a declarar?</td>
+                <td>
+                  <input v-model="numeroCargas" type="number" placeholder="ej: 4" :disabled="!cargasFamiliares">
+                </td>
+              </tr>
+              <tr>
+                <td>Máximo en Gastos personales para aplicar en el año 2024 según sus cargas</td>
+                <td>USD {{ gastosPersonales }}</td>
+              </tr>
+              <tr>
+                <td>¿Tiene usted o alguna de sus cargas familiares alguna enfermedad catalogada como catastrófica, rara
+                  o
+                  huérfana?</td>
+                <td><input v-model="enfermedadCatastrofica" type="checkbox"></td>
+              </tr>
+              <tr>
+                <td>REBAJA MÁXIMA DEL IMPUESTO A LA RENTA 2024</td>
+                <td>USD {{ rebajaMaxima }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+      <button @click="goToPage">Ir a la página</button>    
+    </form>
   </body>
 
   </html>
 </template>
+
 <script>
 
 export default {
@@ -289,7 +278,7 @@ export default {
         3: 1989.72,
         4: 2416.08,
         5: 2842.45
-      }
+      },
     }
   },
   computed: {
@@ -393,7 +382,6 @@ export default {
     }
   },
   methods: {
-
     //detalle ingresos del colaborador
     formatInput(field) {
       let value = this[field];
@@ -422,33 +410,12 @@ export default {
         this[field] = Math.floor(value);
       }
     },
-    //termina detalle ingresos del colaborador
-    //consulta cedula
-    fetchData() {
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", "Bearer TOKEN");
-      myHeaders.append("Accept", "application/json");
-
-      var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        redirect: 'follow'
-      };
-
-      fetch("https://webservices.ec/api/cedula/0900508300", requestOptions)
-        .then(response => response.text())
-        .then(result => {
-          console.log(result);
-          // Aquí puedes actualizar tus datos con el resultado
-        })
-        .catch(error => console.log('error', error));
+    goToPage() {
+      this.$router.push('/pdf');
     }
+    //termina detalle ingresos del colaborador
   },
-  created() {
-    this.fetchData();
-  }
 }
-
 </script>
 
 
