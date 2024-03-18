@@ -229,7 +229,7 @@
           </table>
         </div>
       </div>
-      <button @click="generarYDescargarPDF">Ver Formulario SRI</button>
+      <button @click="goToAppPdf">Ver Formulario SRI</button>
     </form>
   </body>
 
@@ -237,11 +237,14 @@
 </template>
 
 <script>
-
 export default {
   name: "GastosPersonales",
   data() {
     return {
+      cedulaRuc: null,
+      ciudad: null,
+      fecha: null,
+      nombre: null,
       salarioMensual: null,
       salarioVeces: null,
       comisionesMandatoMensual: null,
@@ -410,15 +413,14 @@ export default {
         this[field] = Math.floor(value);
       }
     },
-    generarYDescargarPDF() {
-      // Supongamos que tienes una función en Pdf.vue llamada generarPDF que acepta los datos y genera el PDF
-      this.$root.$emit('generar-pdf', {
-        cedulaRuc: this.cedulaRuc,
-        nombre: this.nombre,
-        ciudad: this.ciudad,
-      });
+    // Supongamos que tienes una función en Pdf.vue llamada generarPDF que acepta los datos y genera el PDF
+    // goToAppPdf() {
+    //   this.$router.push('/AppPdf');
+    // }
+    goToAppPdf() {
+      this.$router.push('/AppPdf');
     }
-    //termina detalle ingresos del colaborador
+
   },
 }
 </script>
@@ -428,7 +430,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .table-header {
-  background-color: #79adc2;
+  background-color: #4a87e2;
   /* Color amarillo para las cabeceras */
 }
 

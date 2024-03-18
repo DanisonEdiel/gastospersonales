@@ -1,18 +1,14 @@
 <template>
-  <Gastospersonales msg="Tablas"/>
-  <AppPdf msg="Pdf"/>
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <script>
-import Gastospersonales from './components/Gastospersonal.vue'
-import AppPdf from './components/AppPdf.vue'
+// import AppPdf from './components/AppPdf.vue'
 
 export default {
   name: 'App',
-  components: {
-    Gastospersonales,
-    AppPdf
-  }
 }
 </script>
 
