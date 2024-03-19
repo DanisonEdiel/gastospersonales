@@ -7,10 +7,11 @@
   </head>
 
   <body>
+    <h1>Cálculo Proyección Gastos Personales 2024</h1>
     <form>
       <div class="container">
         <!-- Primera tabla -->
-        <table class="table">
+        <!-- <table class="table">
           <thead class="table-header">
             <tr>
               <th colspan="3" class="text-center">Datos personales del Colaborador</th>
@@ -48,37 +49,36 @@
               <td><input type="text"></td>
 
             </tr>
-            <!-- Añade más filas según sea necesario -->
           </tbody>
-        </table>
+        </table> -->
         <!-- Segunda tabla detalle de ingresos del colaborador -->
         <div class="container mt-5">
           <h2 class="text-center mb-4">Detalle de Ingresos del Colaborador</h2>
           <table class="table table-bordered">
             <thead class="table-header">
               <tr>
-                <th></th>
-                <th>Mensual</th>
-                <th>No. Veces al año</th>
-                <th>Ingreso Anual</th>
+                <th class="text-center">INGRESOS</th>
+                <th>MENSUAL</th>
+                <th>NO. VECES AL AÑO</th>
+                <th>INGRESO ANUAL</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Salario</td>
+                <td>Sueldo / Salario</td>
                 <td><input v-model="salarioMensual" @input="formatInput('salarioMensual')" type="text"
                     id="salarioMensual" placeholder="USD"></td>
-                <td><input v-model="salarioVeces" @input="validateInput('salarioVeces', null, 100)" type="number"
-                    min="1" max="100" placeholder="-"></td>
+                <td><input v-model="salarioVeces" @input="validateInput('salarioVeces', null, 1000000)" type="number"
+                     placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ salario }}</p>
                 </td>
               </tr>
               <tr>
-                <td>Comisiones Mandato</td>
+                <td>Comisiones / Bonos</td>
                 <td><input v-model="comisionesMandatoMensual" @input="formatInput('comisionesMandatoMensual')"
                     type="text" placeholder="USD"></td>
-                <td><input v-model="comisionesMandatoVeces" @input="validateInput('comisionesMandatoVeces', null, 100)"
+                <td><input v-model="comisionesMandatoVeces" @input="validateInput('comisionesMandatoVeces', null, 1000000)"
                     type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ comisionesMandato }}</p>
@@ -89,16 +89,16 @@
                 <td><input v-model="remuneracionVariableMensual" @input="formatInput('remuneracionVariableMensual')"
                     type="text" placeholder="USD"></td>
                 <td><input v-model="remuneracionVariableVeces"
-                    @input="validateInput('remuneracionVariableVeces', null, 100)" type="text" placeholder="-"></td>
+                    @input="validateInput('remuneracionVariableVeces', null, 1000000)" type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ remuneracionVariable }}</p>
                 </td>
               </tr>
               <tr>
-                <td>Horas extras</td>
+                <td>Horas Extras</td>
                 <td><input v-model="horasExtrasMensual" @input="formatInput('horasExtrasMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="horasExtrasVeces" type="text" placeholder="-"></td>
+                <td><input v-model="horasExtrasVeces" @input="validateInput('horasExtrasVeces', null, 1000000)" type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ horasExtras }}</p>
                 </td>
@@ -107,7 +107,7 @@
                 <td>Otros</td>
                 <td><input v-model="otrosMensual" @input="formatInput('otrosMensual')" type="text" placeholder="USD">
                 </td>
-                <td><input v-model="otrosVeces" @input="validateInput('otrosVeces', null, 100)" type="text"
+                <td><input v-model="otrosVeces" @input="validateInput('otrosVeces', null, 1000000)" type="text"
                     placeholder="-">
                 </td>
                 <td class="text-right">
@@ -115,10 +115,10 @@
                 </td>
               </tr>
               <tr>
-                <td>Utilidades (A recibir Abr 2024)</td>
+                <td>Utilidades</td>
                 <td><input v-model="utilidadesMensual" @input="formatInput('utilidadesMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 100)" type="text"
+                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 1000000)" type="text"
                     placeholder="-">
                 </td>
                 <td class="text-right">
@@ -140,17 +140,17 @@
                 <td><input v-model="ingresoMensual" @input="formatInput('ingresoMensual')" type="text"
                     placeholder="USD">
                 </td>
-                <td><input v-model="ingresoVeces" @input="validateInput('ingresoVeces', null, 100)" type="text"
+                <td><input v-model="ingresoVeces" @input="validateInput('ingresoVeces', null, 1000000)" type="text"
                     placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ ingresos }}</p>
                 </td>
               </tr>
               <tr>
-                <td>Vacaciones pagadas</td>
+                <td>Otros Ingresos</td>
                 <td><input v-model="vacacionesMensual" @input="formatInput('vacacionesMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="vacacionesVeces" @input="validateInput('vacacionesVeces', null, 100)" type="text"
+                <td><input v-model="vacacionesVeces" @input="validateInput('vacacionesVeces', null, 1000000)" type="text"
                     placeholder="-">
                 </td>
                 <td class="text-right">
@@ -158,24 +158,24 @@
                 </td>
               </tr>
               <tr>
-                <td>Utilidades (recibidad Abr 2024)</td>
+                <td>Utilidades</td>
                 <td><input v-model="utilidadesEmpleadorMensual" @input="formatInput('utilidadesEmpleadorMensual')"
                     type="text" placeholder="USD"></td>
                 <td><input v-model="utilidadesEmpleadorVeces"
-                    @input="validateInput('utilidadesEmpleadorVeces', null, 100)" type="text" placeholder="-"></td>
+                    @input="validateInput('utilidadesEmpleadorVeces', null, 1000000)" type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ utilidadesEmpleador }}</p>
                 </td>
               </tr>
 
               <tr>
-                <td colspan="3">Total Ingresos Anuales Proyectados - Otro empleador</td>
+                <td colspan="3">Total Ingresos Anuales Proyectados - Otro Empleador</td>
                 <td class="text-right">
                   <p>{{ ingresosAnualesEmpleador }}</p>
                 </td>
               </tr>
               <tr>
-                <td colspan="3">TOTAL INGRESOS ANUALES (INCLUYE INGRESOS EXENTOS) CONSOLIDADO</td>
+                <td colspan="3"><strong>TOTAL INGRESOS ANUALES (INCLUYE INGRESOS EXENTOS) CONSOLIDADO</strong> </td>
                 <td class="text-right">
                   <p>{{ ingresosAnualesConsolidado }}</p>
                 </td>
@@ -186,7 +186,7 @@
 
         <!--tercera tabla credito tributario para impuesto a la renta por gastos personales-->
         <div class="container mt-5">
-          <h2 class="text-center mb-4">Cálculo de gastos personales</h2>
+          <h2 class="text-center mb-4">Cálculo de Gastos Personales</h2>
           <table class="table table-bordered">
             <thead class="table-header">
               <tr>
@@ -229,7 +229,7 @@
           </table>
         </div>
       </div>
-      <button @click="goToAppPdf">Ver Formulario SRI</button>
+      <!-- <button @click="goToAppPdf">Ver Formulario SRI</button> -->
     </form>
   </body>
 
@@ -413,10 +413,6 @@ export default {
         this[field] = Math.floor(value);
       }
     },
-    // Supongamos que tienes una función en Pdf.vue llamada generarPDF que acepta los datos y genera el PDF
-    // goToAppPdf() {
-    //   this.$router.push('/AppPdf');
-    // }
     goToAppPdf() {
       this.$router.push('/AppPdf');
     }
@@ -430,20 +426,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .table-header {
-  background-color: #4a87e2;
+  background-color: #5d7eaa;
   /* Color amarillo para las cabeceras */
 }
 
-.table-bordered th,
 .table-bordered td {
   border: 1px solid #dee2e6;
   /* Borde para las celdas */
 }
 
-.text-right {
-  text-align: right;
-  /* Alineación de texto a la derecha */
+.table-bordered th{
+  color: #dee2e6
 }
+
+
 
 input {
   width: 100%;
