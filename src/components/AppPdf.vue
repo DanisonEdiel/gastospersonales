@@ -207,12 +207,18 @@
 <script>
 
 export default {
+  // computed: {
+  //   cedulaRuc() {
+  //     return this.$store.state.cedulaRuc
+  //   }
+  // },
   data() {
     return {
       datos: this.$route.params.datos
     };
   }
 }
+
 
 
 </script>

@@ -1,20 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default createStore({
   state: {
-    datos: null
+    cedulaRuc: null
   },
   mutations: {
-    SET_DATOS(state, datos) {
-      state.datos = datos
-    }
-  },
-  actions: {
-    setDatos({ commit }, datos) {
-      commit('SET_DATOS', datos)
+    setCedulaRuc(state, value) {
+      state.cedulaRuc = value
     }
   }
 })

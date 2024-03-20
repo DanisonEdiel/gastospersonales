@@ -7,14 +7,13 @@
   </head>
 
   <body>
-    <h1>Cálculo Proyección Gastos Personales 2024</h1>
-    <form>
+    <form v-if="mostrarFormulario">
       <div class="container">
         <!-- Primera tabla -->
-        <!-- <table class="table">
+        <table class="table table-bordered">
           <thead class="table-header">
             <tr>
-              <th colspan="3" class="text-center">Datos personales del Colaborador</th>
+              <th colspan="3" class="text-center">DATOS PERSONALES DEL COLABORADOR</th>
             </tr>
           </thead>
           <tbody>
@@ -36,21 +35,21 @@
             <tr>
               <td>Fecha de <strong>elaboración</strong></td>
               <td>Año (números)</td>
-              <td><input v-model="fecha" type="text"></td>
+              <td><input v-model="anio" type="text"></td>
             </tr>
             <tr>
               <td></td>
               <td>Mes (números)</td>
-              <td><input type="text"></td>
+              <td><input v-model="mes" type="text"></td>
             </tr>
             <tr>
               <td></td>
               <td>Día (números)</td>
-              <td><input type="text"></td>
+              <td><input v-model="dia" type="text"></td>
 
             </tr>
           </tbody>
-        </table> -->
+        </table>
         <!-- Segunda tabla detalle de ingresos del colaborador -->
         <div class="container mt-5">
           <h2 class="text-center mb-4">Detalle de Ingresos del Colaborador</h2>
@@ -68,8 +67,8 @@
                 <td>Sueldo / Salario</td>
                 <td><input v-model="salarioMensual" @input="formatInput('salarioMensual')" type="text"
                     id="salarioMensual" placeholder="USD"></td>
-                <td><input v-model="salarioVeces" @input="validateInput('salarioVeces', null, 1000000)" type="number"
-                     placeholder="-"></td>
+                <td><input v-model="salarioVeces" @input="validateInput('salarioVeces', null, 12)" type="number"
+                    placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ salario }}</p>
                 </td>
@@ -78,8 +77,8 @@
                 <td>Comisiones / Bonos</td>
                 <td><input v-model="comisionesMandatoMensual" @input="formatInput('comisionesMandatoMensual')"
                     type="text" placeholder="USD"></td>
-                <td><input v-model="comisionesMandatoVeces" @input="validateInput('comisionesMandatoVeces', null, 1000000)"
-                    type="text" placeholder="-"></td>
+                <td><input v-model="comisionesMandatoVeces"
+                    @input="validateInput('comisionesMandatoVeces', null, 1000000)" type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ comisionesMandato }}</p>
                 </td>
@@ -98,7 +97,8 @@
                 <td>Horas Extras</td>
                 <td><input v-model="horasExtrasMensual" @input="formatInput('horasExtrasMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="horasExtrasVeces" @input="validateInput('horasExtrasVeces', null, 1000000)" type="text" placeholder="-"></td>
+                <td><input v-model="horasExtrasVeces" @input="validateInput('horasExtrasVeces', null, 1000000)"
+                    type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ horasExtras }}</p>
                 </td>
@@ -118,8 +118,8 @@
                 <td>Utilidades</td>
                 <td><input v-model="utilidadesMensual" @input="formatInput('utilidadesMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 1000000)" type="text"
-                    placeholder="-">
+                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 1)"
+                    type="text" placeholder="-">
                 </td>
                 <td class="text-right">
                   <p>{{ utilidades }}</p>
@@ -150,8 +150,8 @@
                 <td>Otros Ingresos</td>
                 <td><input v-model="vacacionesMensual" @input="formatInput('vacacionesMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="vacacionesVeces" @input="validateInput('vacacionesVeces', null, 1000000)" type="text"
-                    placeholder="-">
+                <td><input v-model="vacacionesVeces" @input="validateInput('vacacionesVeces', null, 1000000)"
+                    type="text" placeholder="-">
                 </td>
                 <td class="text-right">
                   <p>{{ vacaciones }}</p>
@@ -228,9 +228,631 @@
             </tbody>
           </table>
         </div>
+        <div class="container mt-5">
+          <h3>RESPALDOS PARA LOS GASTOS DECLARADOS COMO DEDUCIBLES
+            PARA LA REBAJA MÁXIMA DE IMPUESTO A LA RENTA</h3>
+          <table class="table table-bordered">
+            <thead class="table-header">
+              <tr>
+                <th></th>
+                <th class="text-center">CONCEPTO</th>
+                <th>DETALLE</th>
+                <th>DOC CON EL QUE PUEDE DEDUCIR</th>
+                <th>MONTO UNITARIO</th>
+                <th>No. Veces al año</th>
+                <th class="text-right">MONTO TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="6"><strong>VIVIENDA</strong></td>
+                <td>ADQUISICIÓN / CONSTRUCCION / REMODELACIÓN / AMPLIACIÓN / MEJORA / MANTENIMIENTO</td>
+                <td>De un único bien inmueble para vivienda</td>
+                <td>Factura</td>
+                <td><input v-model="adquisicionMonto" @input="formatInput('adquisicionMonto')" type="text"
+                    id="adquisicionMonto" placeholder="USD"></td>
+                <td><input v-model="adquisicionVeces" @input="validateInput('adquisicionVeces', null, 12)" type="number"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ adquisicionTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>INTERESES PRÉSTAMO HIPOTECARIO</td>
+                <td>Los <strong>intereses </strong>de préstamos hipotecarios</td>
+                <td>Contrato de préstamo</td>
+                <td><input v-model="interesMonto" @input="formatInput('interesMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="interesVeces" @input="validateInput('interesVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ interesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>IMPUESTO PREDIAL</td>
+                <td>Impuestos Prediales de un único inmueble para vivienda</td>
+                <td>Cartilla de pago</td>
+                <td><input v-model="impuestoMonto" @input="formatInput('impuestoMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="impuestoVeces" @input="validateInput('impuestoVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ impuestoTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>ALICUOTAS DE CONDOMINIO</td>
+                <td>De un único bien inmueble para vivienda</td>
+                <td>Factura/Recibo</td>
+                <td><input v-model="alicuotaMonto" @input="formatInput('alicuotaMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="alicuotaVeces" @input="validateInput('alicuotaVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ alicuotaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>ARRIENDO</td>
+                <td>De un único bien inmueble para vivienda</td>
+                <td>Factura</td>
+                <td><input v-model="arriendoMonto" @input="formatInput('arriendoMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="arriendoVeces" @input="validateInput('arriendoVeces', null, 1000000)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ arriendoTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>PAGO SERVICIOS BASICOS : Agua, gas, luz, teléfono convencional</td>
+                <td>De un único bien inmueble para vivienda</td>
+                <td>Factura</td>
+                <td><input v-model="pagoServiciosMonto" @input="formatInput('pagoServiciosMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="pagoServiciosVeces" @input="validateInput('pagoServiciosVeces', null, 1000000)"
+                    type="text" placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ pagoServiciosTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6">Total Vivienda</td>
+                <td class="text-right">
+                  <p> {{ viviendaTotal }}</p>
+                  <p v-if="viviendaTotal > gastosPersonales">HEY<i class="bi bi-x"></i>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="8"><strong>EDUCACIÓN, ARTE Y CULTURA</strong></td>
+                <td>MATRÍCULA, PENSION, DERECHOS DE GRADO</td>
+                <td>Matrículas y pensiones en todos los niveles educativos de instituciones aprobadas por el Ministerio
+                  de Educación o en el Consejo Nacional de Educación Superior.</td>
+                <td>Factura</td>
+                <td><input v-model="matriculaMonto" @input="formatInput('matriculaMonto')" type="text"
+                    placeholder="USD">
+                </td>
+                <td><input v-model="matriculaVeces" @input="validateInput('matriculaVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ matriculaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>ÚTILES Y TEXTOS ESCOLARES / MATERIAL DIDACTICO PARA ESTUDIO </td>
+                <td>Útiles y textos escolares utilizados en la educación.</td>
+                <td>Factura</td>
+                <td><input v-model="utilesMonto" @input="formatInput('utilesMonto')" type="text" placeholder="USD"></td>
+                <td><input v-model="utilesVeces" @input="validateInput('utilesVeces', null, 1000000)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ utilesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>UNIFORMES</td>
+                <td>Uniformes en general.</td>
+                <td>Factura</td>
+                <td><input v-model="uniformesMonto" @input="formatInput('uniformesMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="uniformesVeces" @input="validateInput('uniformesVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ uniformesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>TRANSPORTE ESCOLAR</td>
+                <td>UTransporte para la educación.</td>
+                <td>Factura</td>
+                <td><input v-model="transporteMonto" @input="formatInput('transporteMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="transporteVeces" @input="validateInput('transporteVeces', null, 1000000)"
+                    type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ transporteTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>EDUCACIÓN PARA DISCAPACITADOS</td>
+                <td>Servicios de educación especial brindados por órganos competentes y autorizados.</td>
+                <td>Factura</td>
+                <td><input v-model="educacionMonto" @input="formatInput('educacionMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="educacionVeces" @input="validateInput('educacionVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ educacionTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>CUIDADO INFANTIL</td>
+                <td>Servicios prestados por centros infantiles autorizados</td>
+                <td>Factura</td>
+                <td><input v-model="cuidadoMonto" @input="formatInput('cuidadoMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="cuidadoVeces" @input="validateInput('cuidadoVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ cuidadoTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>EQUIPOS DE COMPUTACIÓN</td>
+                <td>Equipo de computación destinado para la educación</td>
+                <td>Factura</td>
+                <td><input v-model="equiposMonto" @input="formatInput('equiposMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="equiposVeces" @input="validateInput('equiposVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ equiposTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>CRÉDITOS EDUCATIVOS</td>
+                <td>Intereses créditos educativos otorgados por Instituciones autorizadas.</td>
+                <td>Factura</td>
+                <td><input v-model="creditosMonto" @input="formatInput('creditosMonto')" type="text" placeholder="USD">
+                </td>
+                <td><input v-model="creditosVeces" @input="validateInput('creditosVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ creditosTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6">Total Educación</td>
+                <td class="text-right">
+                  <p>{{ educacionArteCulturaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="2"><strong>VESTIMENTA</strong></td>
+                <td>VESTIMENTA</td>
+                <td>De un único bien inmueble para vivienda</td>
+                <td>Factura</td>
+                <td><input v-model="vestimentaMonto" @input="formatInput('vestimentaMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="vestimentaVeces" @input="validateInput('vestimentaVeces', null, 12)" type="number"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ vestimentaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">Total Vestimenta</td>
+                <td class="text-right">
+                  <p>{{ vestimentaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>ALIMENTACIÓN</strong></td>
+                <td>PRODUCTOS NATURALES, ARTIFICIALES</td>
+                <td>Compra de alimentos de consumo humano.</td>
+                <td>Factura</td>
+                <td><input v-model="productosMonto" @input="formatInput('productosMonto')" type="text"
+                    id="adquisicionMonto" placeholder="USD"></td>
+                <td><input v-model="productosVeces" @input="validateInput('productosVeces', null, 12)" type="number"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ productosTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>PENSIONES ALIMENTICIAS</td>
+                <td>Pensiones alimenticias respaldadas en una resolución judicial. Ante la autoridad competente.</td>
+                <td>Resolución Judicial</td>
+                <td><input v-model="pensionesMonto" @input="formatInput('pensionesMonto')" type="text"
+                    placeholder="USD">
+                </td>
+                <td><input v-model="pensionesVeces" @input="validateInput('pensionesVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ pensionesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>RESTAURANTES</td>
+                <td>Compra de alimentos en locales de alimentos preparados.</td>
+                <td>Factura</td>
+                <td><input v-model="restaurantesMonto" @input="formatInput('restaurantesMonto')" type="text"
+                    id="adquisicionMonto" placeholder="USD"></td>
+                <td><input v-model="restaurantesVeces" @input="validateInput('restaurantesVeces', null, 12)"
+                    type="number" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ restaurantesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">Total alimentación</td>
+                <td class="text-right">
+                  <p>{{ alimentacionTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="4"><strong>TURISMO LOCAL</strong></td>
+                <td>PASAJES AÉREOS</td>
+                <td>Pasajes para movilizarse dentro del ECUADOR</td>
+                <td>Factura</td>
+                <td><input v-model="pasajesMonto" @input="formatInput('pasajesMonto')" type="text" id="adquisicionMonto"
+                    placeholder="USD"></td>
+                <td><input v-model="pasajesVeces" @input="validateInput('pasajesVeces', null, 12)" type="number"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ pasajesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>ALIMENTACION</td>
+                <td>Compra de alimentos en locales de alimentos preparados con Licencia Única Anual de Funcionamiento.
+                </td>
+                <td>Factura</td>
+                <td><input v-model="alimentacionTurismoMonto" @input="formatInput('alimentacionTurismoMonto')"
+                    type="text" placeholder="USD">
+                </td>
+                <td><input v-model="alimentacionTurismoVeces"
+                    @input="validateInput('alimentacionTurismoVeces', null, 1000000)" type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ alimentacionTurismoTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>HOSPEDAJE</td>
+                <td>Gastos por alquiler de habitaciones o un bien inmueble dentro del ECUADOR con el objetivo de
+                  realizar turismo local</td>
+                <td>Factura</td>
+                <td><input v-model="hospedajeMonto" @input="formatInput('hospedajeMonto')" type="text"
+                    placeholder="USD">
+                </td>
+                <td><input v-model="hospedajeVeces" @input="validateInput('hospedajeVeces', null, 1000000)" type="text"
+                    placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ hospedajeTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">Total Turismo</td>
+                <td class="text-right">
+                  <p> {{ turismoTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td rowspan="7"><strong>SALUD</strong></td>
+                <td>HONORARIOS MÉDICOS, DE PROFESIONALES DE LA SALUD</td>
+                <td>Honorarios de médicos y profesionales de la salud registrados en el Consejo Nacional de Educación
+                  Superior.</td>
+                <td>Factura</td>
+                <td><input v-model="honorariosMonto" @input="formatInput('honorariosMonto')" type="text"
+                    placeholder="USD">
+                </td>
+                <td><input v-model="honorariosVeces" @input="validateInput('honorariosVeces', null, 1000000)"
+                    type="text" placeholder="-"></td>
+                <td class="text-right">
+                  <p>{{ honorariosTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>SERVICIOS DE SALUD </td>
+                <td>Clínicas, hospitales, laboratorios y farmacias reconocidas por el Ministerio de Salud.</td>
+                <td>Factura</td>
+                <td><input v-model="serviciosMonto" @input="formatInput('serviciosMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="serviciosVeces" @input="validateInput('serviciosVeces', null, 1000000)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ serviciosTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>MEDICINAS Y OTROS </td>
+                <td>Medicamentos, insumos médicos, lentes y prótesis</td>
+                <td>Factura</td>
+                <td><input v-model="medicinasMonto" @input="formatInput('medicinasMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="medicinasVeces" @input="validateInput('medicinasVeces', null, 1000000)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ medicinasTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>MEDICINA PREPAGADA</td>
+                <td>Medicina prepagada de contratos individuales o corporativos, inclusive los descontados vía rol de
+                  pagos.</td>
+                <td>Rol de Pago</td>
+                <td><input v-model="medicinaPrepagadaMonto" @input="formatInput('medicinaPrepagadaMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="medicinaPrepagadaVeces"
+                    @input="validateInput('medicinaPrepagadaVeces', null, 1000000)" type="text" placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ medicinaPrepagadaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>PRIMA DE SEGURO MÉDICO</td>
+                <td>Prima de seguro médico particuar de contratos individuales o corporativos, inclusive los descontados
+                  vía rol de pagos.</td>
+                <td>Rol de Pago</td>
+                <td><input v-model="primaMonto" @input="formatInput('primaMonto')" type="text" placeholder="USD"></td>
+                <td><input v-model="primaVeces" @input="validateInput('primaVeces', null, 1000000)" type="text"
+                    placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ primaTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td>DEDUCIBLES Y COPAGOS</td>
+                <td>El deducible y copago no cancelado por la aseguradora</td>
+                <td>Liquidación</td>
+                <td><input v-model="deduciblesMonto" @input="formatInput('deduciblesMonto')" type="text"
+                    placeholder="USD"></td>
+                <td><input v-model="deduciblesVeces" @input="validateInput('deduciblesVeces', null, 1000000)"
+                    type="text" placeholder="-">
+                </td>
+                <td class="text-right">
+                  <p>{{ deduciblesTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5">Total Salud</td>
+                <td class="text-right">
+                  <p> {{ saludTotal }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6"><strong>TOTAL DEDUCCIÓN DE GASTOS PERSONALES</strong></td>
+                <td class="text-right">
+                  <p> {{ deduccionGastosPersonales }}</p>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6">
+                  <h4><strong>REBAJA DE IMPUESTO A LA RENTA POR GASTOS PERSONALES PROYECTADOS</strong></h4>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
-      <!-- <button @click="goToAppPdf">Ver Formulario SRI</button> -->
+      <button @click="enviarFormulario" :disabled="shouldDisable()">Siguiente</button>
+      <div v-if="shouldDisable()" class="alert alert-danger" role="alert">
+      No puedes avanzar porque los valores sobrepasan el límite que seleccionó: {{ gastosPersonales }}
+    </div>
     </form>
+    <div v-else>
+      <!-- Tu tabla aquí -->
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <th colspan="4" class="header-large">SRI<br>FORMULARIO SRI-GP</th>
+            <th colspan="7" class="header-large">DECLARACIÓN DE GASTOS PERSONALES A SER UTILIZADOS POR EL EMPLEADOR EN
+              EL
+              CASO DE INGRESOS EN RELACIÓN DE DEPENDENCIA</th>
+          </tr>
+        </thead>
+        <tbody class="p">
+          <tr>
+            <td rowspan="2">EJERCICIO FISCAL</td>
+            <td rowspan="2"></td>
+            <td rowspan="2">2</td>
+            <td rowspan="2">0</td>
+            <td rowspan="2">2</td>
+            <td rowspan="2">4</td>
+
+            <td ROWSPAN="2">CIUDAD Y FECHA DE ENTREGA/RECEPCIÓN</td>
+            <td>CIUDAD</td>
+            <td>AÑO</td>
+            <td>MES</td>
+            <td>DIA</td>
+          </tr>
+          <tr>
+            <td>{{ ciudad }}</td>
+            <td>{{ anio }}</td>
+            <td>{{ mes }}</td>
+            <td>{{ dia }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="table-custom">
+        <thead>
+          <tr>
+            <td colspan="4"><strong>Información / Identificación del empleado contribuyente (a ser llenado por el
+                empleado)</strong>
+            </td>
+          </tr>
+        </thead>
+        <tbody class="p">
+          <tr>
+            <td rowspan="2">101</td>
+            <td>CÉDULA O PASAPORTE</td>
+            <td rowspan="2">102</td>
+            <td>APELLIDOS Y NOMBRES COMPLETOS</td>
+          </tr>
+          <tr>
+            <td>{{ cedulaRuc }}</td>
+            <td>{{ nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table-custom">
+        <tbody class="p">
+          <tr>
+            <td colspan="4"><strong>INGRESOS PROYECTADOS (ver Nota 1)</strong></td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) TOTAL INGRESOS CON ESTE EMPLEADOR (con el empleador que más ingresos perciba)</td>
+            <td>103</td>
+            <td>USD$ {{ totalIngresosAnuales }}</td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) TOTAL INGRESOS CON OTROS EMPLEADORES (en caso de haberlos)</td>
+            <td>104</td>
+            <td>USD$ {{ ingresosAnualesEmpleador }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>(=) TOTAL INGRESOS PROYECTADOS</strong></td>
+            <td>105</td>
+            <td>USD$ {{ ingresosAnualesConsolidado }}</td>
+          </tr>
+          <tr>
+            <td colspan="4"><strong>GASTOS PROYECTADOS</strong></td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) GASTOS DE VIVIENDA</td>
+            <td>106</td>
+            <td>USD${{ viviendaTotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) GASTOS DE EDUCACIÓN ARTE Y CULTURA</td>
+            <td>107</td>
+            <td>USD$ {{ educacionArteCulturaTotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) GASTOS DE SALUD</td>
+            <td>108</td>
+            <td>USD$ {{ saludTotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) GASTOS DE VESTIMENTA</td>
+            <td>109</td>
+            <td>USD$ {{ vestimentaTotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) GASTOS DE ALIMENTACIÓN</td>
+            <td>110</td>
+            <td>USD$ {{ alimentacionTotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2">(+) GASTOS DE TURISMO</td>
+            <td>111</td>
+            <td>USD$ {{ turismoTotal }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>(=) TOTAL GASTOS PROYECTADOS (106+107+108+109+110+111)</strong></td>
+            <td>112</td>
+            <td>USD$ {{ deduccionGastosPersonales }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>TRABAJADOR O SUS CARGAS FAMILIARES CON ENFERMEDAD CATASTRÓFICA </strong></td>
+            <td>113</td>
+            <td v-if="cargasFamiliares == true"> SI</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>NÚMERO DE CARGAS FAMILIARES PARA REBAJA DE GASTOS PERSONALES </strong></td>
+            <td>114</td>
+            <td>{{ numeroCargas }}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><strong>REBAJA DE IMPUESTO A LA RENTA POR GASTOS PERSONALES PROYECTADOS</strong></td>
+            <td>115</td>
+            <td>USD$</td>
+          </tr>
+          <tr>
+            <td class="p" colspan="4"><strong>NOTAS:</strong> 1.- Cuando un contribuyente trabaje con DOS O MÁS
+              empleadores,
+              presentará este informe al
+              empleador con el que perciba mayores ingresos, el que efectuará la retención considerando los ingresos
+              gravados y deducciones (aportes personales al IESS) con todos los empleadores, sobre la base imponible así
+              obtenida, se aplicará la tarifa contenida en la tabla de Impuesto a la Renta de personas naturales y
+              sucesiones indivisas de la Ley de Régimen Tributario Interno, con lo que se obtendrá la proyección del
+              Impuesto a la Renta causado en el ejercicio económico. Al resultado obtenido se le restará la rebaja por
+              la proyección de gastos personales, según los límites establecidos en la Ley, y se dividirá para 12, para
+              determinar la alícuota mensual a retener por concepto de Impuesto a la Renta. Cuando la relación laboral
+              inicie en un mes distinto de enero el resultado deberá dividirse para el número de meses que resten para
+              finalizar el periodo.
+              Una copia certificada, con la respectiva firma y sello del empleador, será presentada a los demás
+              empleadores para que se abstengan de efectuar retenciones sobre los pagos efectuados por concepto de
+              remuneración del trabajo en relación de dependencia
+            </td>
+          </tr>
+          <tr>
+            <td class="p" colspan="4">2.- Para efectos de este cálculo se considerará el valor de la canasta familiar
+              básica, al mes
+              de enero del ejercicio fiscal respecto del que se realiza la proyección, según los datos que publique el
+              Instituto Nacional de Estadística y Censos.</td>
+          </tr>
+          <tr>
+            <td class="p" colspan="4">3.- Se considerarán como cargas familiares a los padres, cónyuge o pareja en unión
+              de hecho e
+              hijos hasta los 21 años o con discapacidad de cualquier edad, siempre que no perciban ingresos gravados y
+              que sean dependientes del sujeto pasivo. En ningún caso, dos o más contribuyentes podrán considerar a la
+              misma carga familiar para la rebaja por gastos personales.</td>
+          </tr>
+        </tbody>
+
+      </table>
+      <br>
+      <table class="table-custom p">
+        <thead>
+          <tr>
+            <td colspan="4"><strong>Identificación del Agente de Retención (a ser llenado por el empleador)</strong>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">116</td>
+            <td>RUC</td>
+            <td rowspan="2">117</td>
+            <td> RAZON SOCIAL, DENOMINACIÓN O APELLIDOS Y NOMBRES COMPLETOS</td>
+          </tr>
+          <tr>
+            <td style="width: 250px;"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <table class="table-custom p">
+        <tbody>
+          <tr>
+            <td colspan="2">Firmas</td>
+          </tr>
+          <tr>
+            <td>EMPLEADOR / AGENTE DE RETENCIÓN</td>
+            <td>EMPLEADO CONTRIBUYENTE</td>
+          </tr>
+          <tr>
+            <td style="height: 80px;"></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+    </div>
   </body>
 
   </html>
@@ -241,9 +863,12 @@ export default {
   name: "GastosPersonales",
   data() {
     return {
+      //ingresos anuales
       cedulaRuc: null,
       ciudad: null,
-      fecha: null,
+      anio: null,
+      mes: null,
+      dia: null,
       nombre: null,
       salarioMensual: null,
       salarioVeces: null,
@@ -263,8 +888,8 @@ export default {
       vacacionesVeces: null,
       utilidadesEmpleadorMensual: null,
       utilidadesEmpleadorVeces: null,
-      numeroCargas: null,
       cargasFamiliares: false,
+      numeroCargas: 0,
       enfermedadCatastrofica: false,
       gastosCargas: {
         0: 5526.99,
@@ -282,6 +907,74 @@ export default {
         4: 2416.08,
         5: 2842.45
       },
+      watch:{
+        cargasFamiliares(newValue){
+          this.numeroCargas = newValue ?
+          1:0;
+        },
+      },
+      mostrarFormulario: true,
+      //gastos deducibles
+      //vivienda
+      adquisicionMonto: null,
+      adquisicionVeces: null,
+      interesMonto: null,
+      interesVeces: null,
+      impuestoMonto: null,
+      impuestoVeces: null,
+      alicuotaMonto: null,
+      alicuotaVeces: null,
+      arriendoMonto: null,
+      arriendoVeces: null,
+      pagoServiciosMonto: null,
+      pagoServiciosVeces: null,
+      //eduacion, arte y cultura
+      matriculaMonto: null,
+      matriculaVeces: null,
+      utilesMonto: null,
+      utilesVeces: null,
+      uniformesMonto: null,
+      uniformesVeces: null,
+      transporteMonto: null,
+      transporteVeces: null,
+      educacionMonto: null,
+      educacionVeces: null,
+      cuidadoMonto: null,
+      cuidadoVeces: null,
+      equiposMonto: null,
+      equiposVeces: null,
+      creditosMonto: null,
+      creditosVeces: null,
+      //vestimenta
+      vestimentaMonto: null,
+      vestimentaVeces: null,
+      //alimentacion
+      productosMonto: null,
+      productosVeces: null,
+      pensionesMonto: null,
+      pensionesVeces: null,
+      restaurantesMonto: null,
+      restaurantesVeces: null,
+      //turismo local
+      pasajesMonto: null,
+      pasajesVeces: null,
+      alimentacionTurismoMonto: null,
+      alimentacionTurismoVeces: null,
+      hospedajeMonto: null,
+      hospedajeVeces: null,
+      //salud
+      honorariosMonto: null,
+      honorariosVeces: null,
+      serviciosMonto: null,
+      serviciosVeces: null,
+      medicinasMonto: null,
+      medicinasVeces: null,
+      medicinaPrepagadaMonto: null,
+      medicinaPrepagadaVeces: null,
+      primaMonto: null,
+      primaVeces: null,
+      deduciblesMonto: null,
+      deduciblesVeces: null,      
     }
   },
   computed: {
@@ -382,9 +1075,256 @@ export default {
       } else {
         return this.numeroCargas >= 5 ? this.rebajasMaximas[5] : this.rebajasMaximas[this.numeroCargas];
       }
+    },
+    adquisicionTotal() {
+      if (this.adquisicionMonto && this.adquisicionVeces) {
+        return (parseFloat(this.adquisicionMonto) * parseFloat(this.adquisicionVeces)).toFixed(2);
+      }
+      return null;
+    },
+    //   adquisicionTotal() {
+    // if (this.adquisicionMonto && this.adquisicionVeces) {
+    //   let total = (parseFloat(this.adquisicionMonto) * parseFloat(this.adquisicionVeces)).toFixed(2);
+    //   let maxAllowed = this.numeroCargas >= 5 ? this.gastosCargas[5] : this.gastosCargas[this.numeroCargas];
+
+    //   // Verificar si el total excede maxAllowed y retornar maxAllowed si es así
+    //   return total > maxAllowed ? maxAllowed : total;
+    // }
+    // return null;
+    // },
+
+    interesTotal() {
+      if (this.interesMonto && this.interesVeces) {
+        return (parseFloat(this.interesMonto) * parseFloat(this.interesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    impuestoTotal() {
+      if (this.impuestoMonto && this.impuestoVeces) {
+        return (parseFloat(this.impuestoMonto) * parseFloat(this.impuestoVeces)).toFixed(2);
+      }
+      return null;
+    },
+    alicuotaTotal() {
+      if (this.alicuotaMonto && this.alicuotaVeces) {
+        return (parseFloat(this.alicuotaMonto) * parseFloat(this.alicuotaVeces)).toFixed(2);
+      }
+      return null;
+    },
+    arriendoTotal() {
+      if (this.arriendoMonto && this.arriendoVeces) {
+        return (parseFloat(this.arriendoMonto) * parseFloat(this.arriendoVeces)).toFixed(2);
+      }
+      return null;
+    },
+    pagoServiciosTotal() {
+      if (this.pagoServiciosMonto && this.pagoServiciosVeces) {
+        return (parseFloat(this.pagoServiciosMonto) * parseFloat(this.pagoServiciosVeces)).toFixed(2);
+      }
+      return null;
+    },
+    viviendaTotal() {
+      let total = 0;
+      total += this.adquisicionTotal ? parseFloat(this.adquisicionTotal) : 0;
+      total += this.interesTotal ? parseFloat(this.interesTotal) : 0;
+      total += this.impuestoTotal ? parseFloat(this.impuestoTotal) : 0;
+      total += this.alicuotaTotal ? parseFloat(this.alicuotaTotal) : 0;
+      total += this.arriendoTotal ? parseFloat(this.arriendoTotal) : 0;
+      total += this.pagoServiciosTotal ? parseFloat(this.pagoServiciosTotal) : 0;
+      return total.toFixed(2);
+    },
+
+    matriculaTotal() {
+      if (this.matriculaMonto && this.matriculaVeces) {
+        return (parseFloat(this.matriculaMonto) * parseFloat(this.matriculaVeces)).toFixed(2);
+      }
+      return null;
+    },
+    utilesTotal() {
+      if (this.utilesMonto && this.utilesVeces) {
+        return (parseFloat(this.utilesMonto) * parseFloat(this.utilesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    uniformesTotal() {
+      if (this.uniformesMonto && this.uniformesVeces) {
+        return (parseFloat(this.uniformesMonto) * parseFloat(this.uniformesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    transporteTotal() {
+      if (this.transporteMonto && this.transporteVeces) {
+        return (parseFloat(this.transporteMonto) * parseFloat(this.transporteVeces)).toFixed(2);
+      }
+      return null;
+    },
+    educacionTotal() {
+      if (this.educacionMonto && this.educacionVeces) {
+        return (parseFloat(this.educacionMonto) * parseFloat(this.educacionVeces)).toFixed(2);
+      }
+      return null;
+    },
+    cuidadoTotal() {
+      if (this.cuidadoMonto && this.cuidadoVeces) {
+        return (parseFloat(this.cuidadoMonto) * parseFloat(this.cuidadoVeces)).toFixed(2);
+      }
+      return null;
+    },
+    equiposTotal() {
+      if (this.equiposMonto && this.equiposVeces) {
+        return (parseFloat(this.equiposMonto) * parseFloat(this.equiposVeces)).toFixed(2);
+      }
+      return null;
+    },
+    creditosTotal() {
+      if (this.creditosMonto && this.creditosVeces) {
+        return (parseFloat(this.creditosMonto) * parseFloat(this.creditosVeces)).toFixed(2);
+      }
+      return null;
+    },
+    educacionArteCulturaTotal() {
+      let total = 0;
+      total += this.matriculaTotal ? parseFloat(this.matriculaTotal) : 0;
+      total += this.utilesTotal ? parseFloat(this.utilesTotal) : 0;
+      total += this.uniformesTotal ? parseFloat(this.uniformesTotal) : 0;
+      total += this.transporteTotal ? parseFloat(this.transporteTotal) : 0;
+      total += this.educacionTotal ? parseFloat(this.educacionTotal) : 0;
+      total += this.cuidadoTotal ? parseFloat(this.cuidadoTotal) : 0;
+      total += this.equiposTotal ? parseFloat(this.equiposTotal) : 0;
+      total += this.creditosTotal ? parseFloat(this.creditosTotal) : 0;
+      return total.toFixed(2);
+    },
+    vestimentaTotal() {
+      if (this.vestimentaMonto && this.vestimentaVeces) {
+        return (parseFloat(this.vestimentaMonto) * parseFloat(this.vestimentaVeces)).toFixed(2);
+      }
+      return null;
+    },
+    productosTotal() {
+      if (this.productosMonto && this.productosVeces) {
+        return (parseFloat(this.productosMonto) * parseFloat(this.productosVeces)).toFixed(2);
+      }
+      return null;
+    },
+    pensionesTotal() {
+      if (this.pensionesMonto && this.pensionesVeces) {
+        return (parseFloat(this.pensionesMonto) * parseFloat(this.pensionesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    restaurantesTotal() {
+      if (this.restaurantesMonto && this.restaurantesVeces) {
+        return (parseFloat(this.restaurantesMonto) * parseFloat(this.restaurantesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    alimentacionTotal() {
+      let total = 0;
+      total += this.productosTotal ? parseFloat(this.productosTotal) : 0;
+      total += this.pensionesTotal ? parseFloat(this.pensionesTotal) : 0;
+      total += this.restaurantesTotal ? parseFloat(this.restaurantesTotal) : 0;
+      return total.toFixed(2);
+    },
+    pasajesTotal() {
+      if (this.pasajesMonto && this.pasajesVeces) {
+        return (parseFloat(this.pasajesMonto) * parseFloat(this.pasajesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    alimentacionTurismoTotal() {
+      if (this.alimentacionTurismoMonto && this.alimentacionTurismoVeces) {
+        return (parseFloat(this.alimentacionTurismoMonto) * parseFloat(this.alimentacionTurismoVeces)).toFixed(2);
+      }
+      return null;
+    },
+    hospedajeTotal() {
+      if (this.hospedajeMonto && this.hospedajeVeces) {
+        return (parseFloat(this.hospedajeMonto) * parseFloat(this.hospedajeVeces)).toFixed(2);
+      }
+      return null;
+    },
+    turismoTotal() {
+      let total = 0;
+      total += this.pasajesTotal ? parseFloat(this.pasajesTotal) : 0;
+      total += this.alimentacionTurismoTotal ? parseFloat(this.alimentacionTurismoTotal) : 0;
+      total += this.hospedajeTotal ? parseFloat(this.hospedajeTotal) : 0;
+      return total.toFixed(2);
+    },
+    honorariosTotal() {
+      if (this.honorariosMonto && this.honorariosVeces) {
+        return (parseFloat(this.honorariosMonto) * parseFloat(this.honorariosVeces)).toFixed(2);
+      }
+      return null;
+    },
+    serviciosTotal() {
+      if (this.serviciosMonto && this.serviciosVeces) {
+        return (parseFloat(this.serviciosMonto) * parseFloat(this.serviciosVeces)).toFixed(2);
+      }
+      return null;
+    },
+    medicinasTotal() {
+      if (this.medicinasMonto && this.medicinasVeces) {
+        return (parseFloat(this.medicinasMonto) * parseFloat(this.medicinasVeces)).toFixed(2);
+      }
+      return null;
+    },
+    medicinaPrepagadaTotal() {
+      if (this.medicinaPrepagadaMonto && this.medicinaPrepagadaVeces) {
+        return (parseFloat(this.medicinaPrepagadaMonto) * parseFloat(this.medicinaPrepagadaVeces)).toFixed(2);
+      }
+      return null;
+    },
+    primaTotal() {
+      if (this.primaMonto && this.primaVeces) {
+        return (parseFloat(this.primaMonto) * parseFloat(this.primaVeces)).toFixed(2);
+      }
+      return null;
+    },
+    deduciblesTotal() {
+      if (this.deduciblesMonto && this.deduciblesVeces) {
+        return (parseFloat(this.deduciblesMonto) * parseFloat(this.deduciblesVeces)).toFixed(2);
+      }
+      return null;
+    },
+    saludTotal() {
+      let total = 0;
+      total += this.honorariosTotal ? parseFloat(this.honorariosTotal) : 0;
+      total += this.serviciosTotal ? parseFloat(this.serviciosTotal) : 0;
+      total += this.medicinasTotal ? parseFloat(this.medicinasTotal) : 0;
+      total += this.medicinaPrepagadaTotal ? parseFloat(this.medicinaPrepagadaTotal) : 0;
+      total += this.primaTotal ? parseFloat(this.primaTotal) : 0;
+      total += this.deduciblesTotal ? parseFloat(this.deduciblesTotal) : 0;
+      return total.toFixed(2);
+    },
+    deduccionGastosPersonales() {
+      let total = 0;
+      total += this.viviendaTotal ? parseFloat(this.viviendaTotal) : 0;
+      total += this.educacionArteCulturaTotal ? parseFloat(this.educacionArteCulturaTotal) : 0;
+      total += this.vestimentaTotal ? parseFloat(this.vestimentaTotal) : 0;
+      total += this.alimentacionTotal ? parseFloat(this.alimentacionTotal) : 0;
+      total += this.turismoTotal ? parseFloat(this.turismoTotal) : 0;
+      total += this.saludTotal ? parseFloat(this.saludTotal) : 0;
+      return total.toFixed(2);
     }
   },
   methods: {
+    shouldDisable() {
+      return this.viviendaTotal > this.gastosPersonales || this.vestimentaTotal > this.gastosPersonales
+      || this.educacionArteCulturaTotal > this.gastosPersonales || this.alimentacionTotal > this.gastosPersonales
+      || this.turismoTotal > this.gastosPersonales || this.saludTotal > this.gastosPersonales;
+    },
+    enviarFormulario() {
+      if (this.shouldDisable()) {
+        this.showAlert = true;
+      } else {
+        this.mostrarFormulario = false;
+
+        // Aquí puedes poner el código para enviar el formulario
+      }
+    },
+
+    // tus otros métodos aquí
+
     //detalle ingresos del colaborador
     formatInput(field) {
       let value = this[field];
@@ -413,18 +1353,46 @@ export default {
         this[field] = Math.floor(value);
       }
     },
-    goToAppPdf() {
-      this.$router.push('/AppPdf');
-    }
+    // goToAppPdf() {
+    //   this.$router.push('/AppPdf');
+    // }
 
   },
 }
 </script>
 
-
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.table-custom {
+  width: 70%;
+  /* Ajusta esto al ancho que desees */
+  max-width: 800px;
+  /* Ajusta esto al ancho máximo que desees */
+  margin: auto;
+  /* Centra la tabla horizontalmente */
+  border-collapse: separate;
+}
+
+.table-custom td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: left;
+}
+
+.table-custom th {
+  background-color: #ADD8E6;
+  text-align: center;
+}
+
+.table-custom .header-large {
+  background-color: #ADD8E6;
+}
+
+
+.p {
+  font-size: 10px;
+}
+
 .table-header {
   background-color: #5d7eaa;
   /* Color amarillo para las cabeceras */
@@ -435,11 +1403,9 @@ export default {
   /* Borde para las celdas */
 }
 
-.table-bordered th{
+.table-bordered th {
   color: #dee2e6
 }
-
-
 
 input {
   width: 100%;
