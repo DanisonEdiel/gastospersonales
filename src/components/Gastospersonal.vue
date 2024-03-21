@@ -7,7 +7,9 @@ t
     </head>
 
     <body>
+      
       <form v-if="mostrarFormulario">
+        <h2>Declaración de Gastos Personales</h2>
         <div class="container">
           <!-- Primera tabla -->
           <table class="table table-bordered" id="datosColaborador">
@@ -30,11 +32,13 @@ t
                     id="cedulaRuc"
                     name="cedulaRuc"
                   />
-                  <p
+                  <!-- <p
                     v-if="cedulaRuc.length !== 10 && cedulaRuc.length !== 13"
-                    class="alerta"
-                  >
-                    *La cédula debe tener 10 o 13 caracteres
+                    class="alerta"> -->
+                    <p
+                    v-if="cedulaRuc.length !== 10"
+                    class="alerta">
+                    *La cédula debe tener 10 caracteres*
                   </p>
                 </td>
               </tr>
