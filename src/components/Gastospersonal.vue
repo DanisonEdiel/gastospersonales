@@ -118,8 +118,8 @@
                 <td>Utilidades</td>
                 <td><input v-model="utilidadesMensual" @input="formatInput('utilidadesMensual')" type="text"
                     placeholder="USD"></td>
-                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 1)"
-                    type="text" placeholder="-">
+                <td><input v-model="utilidadesVeces" @input="validateInput('utilidadesVeces', null, 1)" type="text"
+                    placeholder="-">
                 </td>
                 <td class="text-right">
                   <p>{{ utilidades }}</p>
@@ -162,7 +162,7 @@
                 <td><input v-model="utilidadesEmpleadorMensual" @input="formatInput('utilidadesEmpleadorMensual')"
                     type="text" placeholder="USD"></td>
                 <td><input v-model="utilidadesEmpleadorVeces"
-                    @input="validateInput('utilidadesEmpleadorVeces', null, 1000000)" type="text" placeholder="-"></td>
+                    @input="validateInput('utilidadesEmpleadorVeces', null, 1)" type="text" placeholder="-"></td>
                 <td class="text-right">
                   <p>{{ utilidadesEmpleador }}</p>
                 </td>
@@ -203,7 +203,7 @@
               </tr>
               <tr>
                 <td>¿Va a declarar cargas familiares?</td>
-                <td><input v-model="cargasFamiliares" type="checkbox"></td>
+                <input v-model="cargasFamiliares" type="checkbox" @change="checkCargasFamiliares">
               </tr>
               <tr>
                 <td>¿Cuántas cargas familiares va a declarar?</td>
@@ -639,6 +639,9 @@
                 <td colspan="6">
                   <h4><strong>REBAJA DE IMPUESTO A LA RENTA POR GASTOS PERSONALES PROYECTADOS</strong></h4>
                 </td>
+                <td class="text-right">
+                  <p> {{ rebajaGastosPersonales }}</p>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -647,10 +650,10 @@
       </div>
       <button @click="enviarFormulario" :disabled="shouldDisable()">Siguiente</button>
       <div v-if="shouldDisable()" class="alert alert-danger" role="alert">
-      No puedes avanzar porque los valores sobrepasan el límite que seleccionó: {{ gastosPersonales }}
-    </div>
+        No puedes avanzar porque los valores sobrepasan el límite que seleccionó: {{ gastosPersonales }}
+      </div>
     </form>
-    <div v-else>
+    <div v-else id="content">
       <!-- Tu tabla aquí -->
       <table class="table-custom">
         <thead>
@@ -850,6 +853,8 @@
           </tr>
         </tbody>
       </table>
+      <button @click="imprimir">Imprimir en PDF</button>
+      <button @click="descargarPDF">Descargar en PDF</button>
     </div>
     <div>
     </div>
@@ -859,6 +864,10 @@
 </template>
 
 <script>
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import htmlToPdfMake from "html-to-pdfmake";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default {
   name: "GastosPersonales",
   data() {
@@ -906,12 +915,6 @@ export default {
         3: 1989.72,
         4: 2416.08,
         5: 2842.45
-      },
-      watch:{
-        cargasFamiliares(newValue){
-          this.numeroCargas = newValue ?
-          1:0;
-        },
       },
       mostrarFormulario: true,
       //gastos deducibles
@@ -974,7 +977,7 @@ export default {
       primaMonto: null,
       primaVeces: null,
       deduciblesMonto: null,
-      deduciblesVeces: null,      
+      deduciblesVeces: null,
     }
   },
   computed: {
@@ -1076,22 +1079,22 @@ export default {
         return this.numeroCargas >= 5 ? this.rebajasMaximas[5] : this.rebajasMaximas[this.numeroCargas];
       }
     },
+    rebajaGastosPersonales() {
+      let result;
+      if (this.deduccionGastosPersonales >= this.gastosPersonales) {
+        return this.rebajaMaxima;
+      } else {
+        result = this.deduccionGastosPersonales * 0.18;
+      }
+      return result.toFixed(2);
+    },
+
     adquisicionTotal() {
       if (this.adquisicionMonto && this.adquisicionVeces) {
         return (parseFloat(this.adquisicionMonto) * parseFloat(this.adquisicionVeces)).toFixed(2);
       }
       return null;
     },
-    //   adquisicionTotal() {
-    // if (this.adquisicionMonto && this.adquisicionVeces) {
-    //   let total = (parseFloat(this.adquisicionMonto) * parseFloat(this.adquisicionVeces)).toFixed(2);
-    //   let maxAllowed = this.numeroCargas >= 5 ? this.gastosCargas[5] : this.gastosCargas[this.numeroCargas];
-
-    //   // Verificar si el total excede maxAllowed y retornar maxAllowed si es así
-    //   return total > maxAllowed ? maxAllowed : total;
-    // }
-    // return null;
-    // },
 
     interesTotal() {
       if (this.interesMonto && this.interesVeces) {
@@ -1310,8 +1313,8 @@ export default {
   methods: {
     shouldDisable() {
       return this.viviendaTotal > this.gastosPersonales || this.vestimentaTotal > this.gastosPersonales
-      || this.educacionArteCulturaTotal > this.gastosPersonales || this.alimentacionTotal > this.gastosPersonales
-      || this.turismoTotal > this.gastosPersonales || this.saludTotal > this.gastosPersonales;
+        || this.educacionArteCulturaTotal > this.gastosPersonales || this.alimentacionTotal > this.gastosPersonales
+        || this.turismoTotal > this.gastosPersonales || this.saludTotal > this.gastosPersonales;
     },
     enviarFormulario() {
       if (this.shouldDisable()) {
@@ -1353,9 +1356,26 @@ export default {
         this[field] = Math.floor(value);
       }
     },
+    checkCargasFamiliares() {
+      this.numeroCargas = this.cargasFamiliares ? 1 : 0;
+    },
     // goToAppPdf() {
     //   this.$router.push('/AppPdf');
     // }
+    imprimir() {
+      window.print();
+    },
+    descargarPDF() {
+      let content = document.getElementById('content');
+      let html = content.innerHTML;
+      let pdfContent = htmlToPdfMake(html);
+
+      let docDefinition = {
+        content: pdfContent,
+      };
+
+      pdfMake.createPdf(docDefinition).download("download.pdf");
+    },
 
   },
 }
@@ -1390,7 +1410,7 @@ export default {
 
 
 .p {
-  font-size: 10px;
+  font-size: 8px;
 }
 
 .table-header {
