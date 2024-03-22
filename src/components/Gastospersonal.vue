@@ -1483,7 +1483,7 @@ t
             </tr>
           </tbody>
         </table>
-        <button class="no-imprimir" @click="imprimir">Imprimir en PDF</button>
+        <button class="no-imprimir" @click="imprimir">Imprimir</button>
       </div>
       <div></div>
     </body>
