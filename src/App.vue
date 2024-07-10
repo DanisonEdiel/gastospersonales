@@ -1,20 +1,18 @@
 <template>
-  <main>
-    <RouterView />
-  </main>
+  <RouterView />
 </template>
 
 <script>
 // import AppPdf from './components/AppPdf.vue'
 
 export default {
-  name: 'App',
-}
+  name: "App",
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
