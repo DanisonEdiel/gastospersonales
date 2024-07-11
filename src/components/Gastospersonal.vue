@@ -20,7 +20,7 @@ t
               <td>
                 <input
                   v-model="cedulaRuc"
-                  @input="validateInput('cedulaRuc')"
+                  @keydown="validateInput('cedulaRuc', null, null, $event)"
                   type="text"
                   id="cedulaRuc"
                   name="cedulaRuc"
@@ -41,7 +41,13 @@ t
             <tr>
               <td>Teléfono</td>
               <td></td>
-              <td><input v-model="phone" type="text" /></td>
+              <td>
+                <input
+                  v-model="phone"
+                  type="text"
+                  @keydown="onlyInteger($event)"
+                />
+              </td>
             </tr>
             <tr>
               <td>Correo</td>
@@ -59,7 +65,7 @@ t
               <td>
                 <input
                   v-model="anio"
-                  @input="validateInput('anio')"
+                  @input="validateInput('anio', null, null, $event)"
                   type="text"
                   placeholder="Ej: 2024"
                   maxlength="4"
@@ -73,7 +79,7 @@ t
                 <input
                   v-model="mes"
                   @input="validateInput('mes', null, 12)"
-                  type="text"
+                  type="number"
                   placeholder="Ej: 1, 12"
                 />
               </td>
@@ -85,7 +91,7 @@ t
                 <input
                   v-model="dia"
                   @input="validateInput('dia', null, 31)"
-                  type="text"
+                  type="number"
                   placeholder="Ej: 1, 31"
                 />
               </td>
@@ -149,7 +155,7 @@ t
                   <input
                     v-model="comisionesMandatoVeces"
                     @input="validateInput('comisionesMandatoVeces', null, 12)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -173,7 +179,7 @@ t
                     @input="
                       validateInput('remuneracionVariableVeces', null, 12)
                     "
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -195,7 +201,7 @@ t
                   <input
                     v-model="horasExtrasVeces"
                     @input="validateInput('horasExtrasVeces', null, 12)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -217,7 +223,7 @@ t
                   <input
                     v-model="otrosVeces"
                     @input="validateInput('otrosVeces', null, 12)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -239,7 +245,7 @@ t
                   <input
                     v-model="utilidadesVeces"
                     @input="validateInput('utilidadesVeces', null, 1)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -273,7 +279,7 @@ t
                   <input
                     v-model="ingresoVeces"
                     @input="validateInput('ingresoVeces', null, 12)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -295,7 +301,7 @@ t
                   <input
                     v-model="vacacionesVeces"
                     @input="validateInput('vacacionesVeces', null, 12)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -317,7 +323,7 @@ t
                   <input
                     v-model="utilidadesEmpleadorVeces"
                     @input="validateInput('utilidadesEmpleadorVeces', null, 1)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -473,7 +479,7 @@ t
                   <input
                     v-model="interesVeces"
                     @input="validateInput('interesVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -497,7 +503,7 @@ t
                   <input
                     v-model="impuestoVeces"
                     @input="validateInput('impuestoVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -521,7 +527,7 @@ t
                   <input
                     v-model="alicuotaVeces"
                     @input="validateInput('alicuotaVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -545,7 +551,7 @@ t
                   <input
                     v-model="arriendoVeces"
                     @input="validateInput('arriendoVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -571,7 +577,7 @@ t
                   <input
                     v-model="pagoServiciosVeces"
                     @input="validateInput('pagoServiciosVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -611,7 +617,7 @@ t
                   <input
                     v-model="matriculaVeces"
                     @input="validateInput('matriculaVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -637,7 +643,7 @@ t
                   <input
                     v-model="utilesVeces"
                     @input="validateInput('utilesVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -661,7 +667,7 @@ t
                   <input
                     v-model="uniformesVeces"
                     @input="validateInput('uniformesVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -685,7 +691,7 @@ t
                   <input
                     v-model="transporteVeces"
                     @input="validateInput('transporteVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -712,7 +718,7 @@ t
                   <input
                     v-model="educacionVeces"
                     @input="validateInput('educacionVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -736,7 +742,7 @@ t
                   <input
                     v-model="cuidadoVeces"
                     @input="validateInput('cuidadoVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -760,7 +766,7 @@ t
                   <input
                     v-model="equiposVeces"
                     @input="validateInput('equiposVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -787,7 +793,7 @@ t
                   <input
                     v-model="creditosVeces"
                     @input="validateInput('creditosVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -877,7 +883,7 @@ t
                   <input
                     v-model="pensionesVeces"
                     @input="validateInput('pensionesVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -963,7 +969,7 @@ t
                     @input="
                       validateInput('alimentacionTurismoVeces', null, 1000000)
                     "
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -990,7 +996,7 @@ t
                   <input
                     v-model="hospedajeVeces"
                     @input="validateInput('hospedajeVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -1024,7 +1030,7 @@ t
                   <input
                     v-model="honorariosVeces"
                     @input="validateInput('honorariosVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -1051,7 +1057,7 @@ t
                   <input
                     v-model="serviciosVeces"
                     @input="validateInput('serviciosVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -1075,7 +1081,7 @@ t
                   <input
                     v-model="medicinasVeces"
                     @input="validateInput('medicinasVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -1104,7 +1110,7 @@ t
                     @input="
                       validateInput('medicinaPrepagadaVeces', null, 1000000)
                     "
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -1131,7 +1137,7 @@ t
                   <input
                     v-model="primaVeces"
                     @input="validateInput('primaVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -1155,7 +1161,7 @@ t
                   <input
                     v-model="deduciblesVeces"
                     @input="validateInput('deduciblesVeces', null, 1000000)"
-                    type="text"
+                    type="number"
                     placeholder="-"
                   />
                 </td>
@@ -2148,16 +2154,18 @@ export default {
       }
     },
     onlyInteger(event) {
-      let keyCode = event.which ? event.which : event.keyCode;
-      if (keyCode < 48 || keyCode > 57) {
+      if (isNaN(event.key) && event.key !== "Backspace") {
         event.preventDefault();
       }
     },
-    validateInput(field, min, max) {
+    validateInput(field, min, max, event) {
+      if (event) {
+        this.onlyInteger(event);
+      }
       let value = this[field];
-      if (value < min) {
+      if (min != null && value < min) {
         this[field] = min;
-      } else if (value > max) {
+      } else if (max != null && value > max) {
         this[field] = max;
       } else if (value % 1 !== 0) {
         this[field] = Math.floor(value);
