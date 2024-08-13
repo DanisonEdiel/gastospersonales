@@ -178,7 +178,7 @@
             <td> RAZON SOCIAL, DENOMINACIÓN O APELLIDOS Y NOMBRES COMPLETOS</td>
           </tr>
           <tr>
-            <td style="width: 250px;"></td>
+            <td style="width: 250px; height: 100px;">&nbsp;</td>
             <td></td>
           </tr>
         </tbody>
