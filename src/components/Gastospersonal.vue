@@ -266,7 +266,7 @@
               <tbody class="text-right">
                 <tr>
                   <td>Canasta Básica Familiar</td>
-                  <td>789,57</td>
+                  <td>797.97</td>
                 </tr>
                 <tr>
                   <td>¿Va a declarar cargas familiares?</td>
@@ -447,8 +447,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="matriculaVeces" @input="validateInput('matriculaVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="matriculaVeces" @input="validateInput('matriculaVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ matriculaTotal }}</p>
@@ -480,8 +480,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="uniformesVeces" @input="validateInput('uniformesVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="uniformesVeces" @input="validateInput('uniformesVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ uniformesTotal }}</p>
@@ -496,8 +496,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="transporteVeces" @input="validateInput('transporteVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="transporteVeces" @input="validateInput('transporteVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ transporteTotal }}</p>
@@ -515,8 +515,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="educacionVeces" @input="validateInput('educacionVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="educacionVeces" @input="validateInput('educacionVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ educacionTotal }}</p>
@@ -629,8 +629,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="pensionesVeces" @input="validateInput('pensionesVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="pensionesVeces" @input="validateInput('pensionesVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ pensionesTotal }}</p>
@@ -707,8 +707,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="hospedajeVeces" @input="validateInput('hospedajeVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="hospedajeVeces" @input="validateInput('hospedajeVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ hospedajeTotal }}</p>
@@ -733,8 +733,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="honorariosVeces" @input="validateInput('honorariosVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="honorariosVeces" @input="validateInput('honorariosVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ honorariosTotal }}</p>
@@ -752,8 +752,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="serviciosVeces" @input="validateInput('serviciosVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="serviciosVeces" @input="validateInput('serviciosVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ serviciosTotal }}</p>
@@ -768,8 +768,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="medicinasVeces" @input="validateInput('medicinasVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="medicinasVeces" @input="validateInput('medicinasVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ medicinasTotal }}</p>
@@ -822,8 +822,8 @@
                       placeholder="USD" />
                   </td>
                   <td>
-                    <input v-model="deduciblesVeces" @input="validateInput('deduciblesVeces', null, 12)"
-                      type="number" placeholder="-" />
+                    <input v-model="deduciblesVeces" @input="validateInput('deduciblesVeces', null, 12)" type="number"
+                      placeholder="-" />
                   </td>
                   <td class="text-right">
                     <p>{{ deduciblesTotal }}</p>
@@ -1160,20 +1160,20 @@ export default {
       numeroCargas: 0,
       enfermedadCatastrofica: false,
       gastosCargas: {
-        0: 5526.99,
-        1: 7106.13,
-        2: 8685.27,
-        3: 11053.98,
-        4: 13422.69,
-        5: 15791.49,
+        0: 5585.79,
+        1: 7181.73,
+        2: 8777.67,
+        3: 11171.58,
+        4: 13565.49,
+        5: 15959.4,
       },
       rebajasMaximas: {
-        0: 994.86,
-        1: 1279.1,
-        2: 1563.35,
-        3: 1989.72,
-        4: 2416.08,
-        5: 2842.45,
+        0: 1005.40,
+        1: 1292.70,
+        2: 1579.99,
+        3: 2010.89,
+        4: 2441.79,
+        5: 2872.62,
       },
       mostrarFormulario: true,
       //gastos deducibles
@@ -1354,7 +1354,7 @@ export default {
     //calculo crédito tributario
     gastosPersonales() {
       if (this.enfermedadCatastrofica) {
-        return 78957.0;
+        return 79797.0;
       } else if (this.numeroCargas >= 5) {
         return this.gastosCargas[5];
       } else {
@@ -1363,7 +1363,7 @@ export default {
     },
     rebajaMaxima() {
       if (this.enfermedadCatastrofica) {
-        return 14212.26;
+        return 14363.46;
       } else {
         return this.numeroCargas >= 5
           ? this.rebajasMaximas[5]
@@ -1822,27 +1822,143 @@ export default {
     checkCargasFamiliares() {
       this.numeroCargas = this.cargasFamiliares ? 1 : 0;
     },
-    // imprimir() {
-    //   const content = document.getElementById('content').innerHTML; 
-    //   var estilos = document.head.innerHTML;
-    //   const newWindow = window.open('', '', 'width=800,height=600');
-    //   newWindow.document.write('<html><head>');
-    //   newWindow.document.write(estilos);
-    //   newWindow.document.write('</head><body>');
-    //   newWindow.document.write(content);
-    //   newWindow.document.write('</body></html>');
-    //   newWindow.document.close();
-    //   newWindow.print();
-    // },
-    imprimir() {
-    var originalContent = document.body.innerHTML;
-    var contentToPrint = document.getElementById('content').innerHTML;
-    var estilos = document.head.innerHTML;
 
-    document.body.innerHTML = `<html><head>${estilos}</head><body>${contentToPrint}</body></html>`;
-    window.print();
-    document.body.innerHTML = originalContent;
+
+    imprimir() {
+    const content = document.getElementById('content').innerHTML;
+    const newWindow = window.open('', '', 'width=800,height=600');
+    newWindow.document.write(`
+      <html>
+      <head>
+      </head>
+      <body>
+          ${content}
+          <style scoped>
+@media print {
+  .no-imprimir {
+    display: none;
+  }
+
+  .table-custom, .table-custom td, .table-custom th {
+    border: 1px solid black;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+.alerta {
+  color: red;
+}
+
+.o-auto {
+  overflow-x: auto;
+}
+
+.table-custom {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  border-collapse: collapse; /* Mantén esta línea solo aquí */
+}
+
+.table-custom tr,
+.table-custom td {
+  padding: 2px;
+  text-align: left;
+}
+
+.table-custom th {
+  background-color: #add8e6;
+  text-align: center;
+}
+
+.table-custom .header-large {
+  background-color: #c7d5da;
+}
+
+.p-doce {
+  font-size: 12px;
+}
+
+.p-diez {
+  font-size: 10px;
+}
+
+.p-nueve {
+  font-size: 9px;
+}
+
+.p-ocho {
+  font-size: 8px;
+}
+
+.p-catorce {
+  font-size: 14px;
+}
+
+.p-dieciseis {
+  font-size: 16px;
+}
+
+.table-header {
+  background-color: #5d7eaa;
+}
+
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th {
+  color: #dee2e6;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.no-border {
+  border: none !important;
+}
+
+h3 {
+  margin: 40px 0 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
+</style>
+      </body>
+      </html>
+  `);
+    newWindow.document.close();
+    newWindow.print();
 },
+
+
+    // imprimir() {
+    //   var originalContent = document.body.innerHTML;
+    //   var contentToPrint = document.getElementById('content').innerHTML;
+    //   var estilos = document.head.innerHTML;
+
+    //   document.body.innerHTML = `<html><head>${estilos}</head><body>${contentToPrint}</body></html>`;
+    //   window.print();
+    //   document.body.innerHTML = originalContent;
+    // },
 
 
     generatePDF() {
