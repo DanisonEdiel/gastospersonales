@@ -79,7 +79,7 @@
             Llenar esta tabla es obligatoria
           </div>
           <!-- Segunda tabla detalle de ingresos del colaborador -->
-          <div class="container mt-5 o-auto">
+          <div class="mt-5 o-auto">
             <h2 class="text-center mb-4">Detalle de Ingresos del Colaborador</h2>
             <table class="table table-bordered">
               <thead class="table-header">
@@ -253,7 +253,7 @@
 
           <!--tercera tabla credito tributario para impuesto a la renta por gastos personales-->
           <h2 class="text-center mb-4 mt-5">Cálculo de Gastos Personales</h2>
-          <div class="container o-auto">
+          <div class="o-auto">
             <table class="table table-bordered">
               <thead class="table-header">
                 <tr>
@@ -305,7 +305,7 @@
             RESPALDOS PARA LOS GASTOS DECLARADOS COMO DEDUCIBLES PARA LA REBAJA
             MÁXIMA DE IMPUESTO A LA RENTA
           </h3>
-          <div class="container o-auto">
+          <div class="o-auto table-responsive">
             <table class="table table-bordered">
               <thead class="table-header">
                 <tr>
