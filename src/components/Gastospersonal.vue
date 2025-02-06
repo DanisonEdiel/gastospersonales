@@ -56,7 +56,7 @@
                 <td>Año (números)</td>
                 <td>
                   <input v-model="anio" @input="validateInput('anio', null, null, $event)" type="text"
-                    placeholder="Ej: 2024" maxlength="4" />
+                    placeholder="Ej: 2025" maxlength="4" />
                 </td>
               </tr>
               <tr>
@@ -183,7 +183,7 @@
                 </tr>
                 <tr>
                   <td colspan="4">
-                    Si tienes o has tenido otro empleador durante el año 2024, es
+                    Si tienes o has tenido otro empleador durante el año 2025, es
                     decir constas bajo otra relación de dependencia:
                   </td>
                 </tr>
@@ -266,7 +266,7 @@
               <tbody class="text-right">
                 <tr>
                   <td>Canasta Básica Familiar</td>
-                  <td>797.97</td>
+                  <td>798.31</td>
                 </tr>
                 <tr>
                   <td>¿Va a declarar cargas familiares?</td>
@@ -280,7 +280,7 @@
                 </tr>
                 <tr>
                   <td>
-                    Máximo en Gastos personales para aplicar en el año 2024 según
+                    Máximo en Gastos personales para aplicar en el año 2025 según
                     sus cargas
                   </td>
                   <td>USD {{ gastosPersonales }}</td>
@@ -295,7 +295,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>REBAJA MÁXIMA DEL IMPUESTO A LA RENTA 2024</td>
+                  <td>REBAJA MÁXIMA DEL IMPUESTO A LA RENTA 2025</td>
                   <td>USD {{ rebajaMaxima }}</td>
                 </tr>
               </tbody>
@@ -1160,20 +1160,20 @@ export default {
       numeroCargas: 0,
       enfermedadCatastrofica: false,
       gastosCargas: {
-        0: 5585.79,
-        1: 7181.73,
-        2: 8777.67,
-        3: 11171.58,
-        4: 13565.49,
-        5: 15959.4,
+        0: 5588.17,
+        1: 7184.79,
+        2: 8781.41,
+        3: 11176.34,
+        4: 13571.27,
+        5: 15966.2,
       },
       rebajasMaximas: {
-        0: 1005.40,
-        1: 1292.70,
-        2: 1579.99,
-        3: 2010.89,
-        4: 2441.79,
-        5: 2872.62,
+        0: 1005.87,
+        1: 1293.26,
+        2: 1580.65,
+        3: 2011.74,
+        4: 2442.83,
+        5: 2873.92,
       },
       mostrarFormulario: true,
       //gastos deducibles
@@ -1354,7 +1354,7 @@ export default {
     //calculo crédito tributario
     gastosPersonales() {
       if (this.enfermedadCatastrofica) {
-        return 79797.0;
+        return 79831.0;
       } else if (this.numeroCargas >= 5) {
         return this.gastosCargas[5];
       } else {
@@ -1363,7 +1363,7 @@ export default {
     },
     rebajaMaxima() {
       if (this.enfermedadCatastrofica) {
-        return 14363.46;
+        return 14369.58;
       } else {
         return this.numeroCargas >= 5
           ? this.rebajasMaximas[5]
