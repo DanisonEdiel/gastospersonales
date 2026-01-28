@@ -56,7 +56,7 @@
                 <td>Año (números)</td>
                 <td>
                   <input v-model="anio" @input="validateInput('anio', null, null, $event)" type="text"
-                    placeholder="Ej: 2025" maxlength="4" />
+                    placeholder="Ej: 2026" maxlength="4" />
                 </td>
               </tr>
               <tr>
@@ -183,7 +183,7 @@
                 </tr>
                 <tr>
                   <td colspan="4">
-                    Si tienes o has tenido otro empleador durante el año 2025, es
+                    Si tienes o has tenido otro empleador durante el año 2026, es
                     decir constas bajo otra relación de dependencia:
                   </td>
                 </tr>
@@ -266,7 +266,7 @@
               <tbody class="text-right">
                 <tr>
                   <td>Canasta Básica Familiar</td>
-                  <td>798.31</td>
+                  <td>819.01</td>
                 </tr>
                 <tr>
                   <td>¿Va a declarar cargas familiares?</td>
@@ -280,7 +280,7 @@
                 </tr>
                 <tr>
                   <td>
-                    Máximo en Gastos personales para aplicar en el año 2025 según
+                    Máximo en Gastos personales para aplicar en el año 2026 según
                     sus cargas
                   </td>
                   <td>USD {{ gastosPersonales }}</td>
@@ -295,7 +295,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>REBAJA MÁXIMA DEL IMPUESTO A LA RENTA 2025</td>
+                  <td>REBAJA MÁXIMA DEL IMPUESTO A LA RENTA 2026</td>
                   <td>USD {{ rebajaMaxima }}</td>
                 </tr>
               </tbody>
@@ -580,7 +580,7 @@
                 <tr>
                   <td rowspan="2"><strong>VESTIMENTA</strong></td>
                   <td>VESTIMENTA</td>
-                  <td>De un único bien inmueble para vivienda</td>
+                  <td>Ropa</td>
                   <td>Factura</td>
                   <td>
                     <input v-model="vestimentaMonto" @input="formatInput('vestimentaMonto')" type="text"
