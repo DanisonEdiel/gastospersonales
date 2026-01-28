@@ -17,7 +17,7 @@
             <td rowspan="2">2</td>
             <td rowspan="2">0</td>
             <td rowspan="2">2</td>
-            <td rowspan="2">4</td>
+            <td rowspan="2">6</td>
 
             <td ROWSPAN="2">CIUDAD Y FECHA DE ENTREGA/RECEPCIÓN</td>
             <td>CIUDAD</td>
