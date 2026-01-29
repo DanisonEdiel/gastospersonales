@@ -884,7 +884,7 @@
               <td class="p-doce" rowspan="2">2</td>
               <td class="p-doce" rowspan="2">0</td>
               <td class="p-doce" rowspan="2">2</td>
-              <td class="p-doce" rowspan="2">4</td>
+              <td class="p-doce" rowspan="2">6</td>
 
               <td class="p-doce" rowspan="2">
                 CIUDAD Y FECHA DE ENTREGA/RECEPCIÓN
